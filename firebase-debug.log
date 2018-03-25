@@ -1,0 +1,48 @@
+[debug] [2018-03-25T15:07:40.008Z] ----------------------------------------------------------------------
+[debug] [2018-03-25T15:07:40.011Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-03-25T15:07:40.016Z] CLI Version:   3.17.7
+[debug] [2018-03-25T15:07:40.017Z] Platform:      darwin
+[debug] [2018-03-25T15:07:40.017Z] Node Version:  v6.11.4
+[debug] [2018-03-25T15:07:40.017Z] Time:          Sun Mar 25 2018 11:07:40 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:40.017Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-25T15:07:40.032Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-25T15:07:40.033Z] > authorizing via signed-in user
+[debug] [2018-03-25T15:07:40.035Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-25T15:07:40.035Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/sWiIRMke8uuCUT-tCsc8vvWxQ0Ven-bHOhIq1As0PvcF_gGhcmqBhJdkxXI29xwZ',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Mar 25 2018 11:07:40 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:40.260Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-25T15:07:40.272Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/react-bloc-chat-bdc9e  
+  
+ Sun Mar 25 2018 11:07:40 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:40.688Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-25T15:07:40.690Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/react-bloc-chat-bdc9e/tokens  
+  
+ Sun Mar 25 2018 11:07:40 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:41.146Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-25T15:07:41.148Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/react-bloc-chat-bdc9e  
+  
+ Sun Mar 25 2018 11:07:41 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:41.659Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/vdodge/Bloc/React/bloc-chat-react'...
+[info] 
+[debug] [2018-03-25T15:07:41.664Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/629564740353/clients/_:getWebAppConfig  
+  
+ Sun Mar 25 2018 11:07:41 GMT-0400 (EDT)
+[debug] [2018-03-25T15:07:42.376Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-25T15:07:42.416Z] TypeError: Cannot read property 'public' of undefined
+    at Server.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/serve/hosting.js:34:17)
+    at Server.g (events.js:292:16)
+    at emitNone (events.js:86:13)
+    at Server.emit (events.js:185:7)
+    at emitListeningNT (net.js:1288:10)
+    at _combinedTickCallback (internal/process/next_tick.js:77:11)
+    at process._tickDomainCallback (internal/process/next_tick.js:128:9)
+[error] 
+[error] Error: An unexpected error has occurred.
