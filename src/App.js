@@ -15,11 +15,16 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+	messages: [],
+	newMessage: '',
 	rooms: [],
 	currentRoom: "Welcome Room",
 	newRoom: ''
      };
      this.roomsRef = database.ref('rooms');
+     this.messagesRef = database.ref('messages/' + this.state.currentRoom);
+     this.handleMessageChange= this.handleMessageChange.bind(this);
+     this.handleMessageSubmit= this.handleMessageSubmit.bind(this);
      this.handleChange= this.handleChange.bind(this);
      this.handleSubmit= this.handleSubmit.bind(this);
   }
@@ -29,17 +34,49 @@ class App extends Component {
 	const room = snapshot.val();
 	console.log(room);
        	room.key = snapshot.key;
-      	this.setState({ rooms: this.state.rooms.concat( room ), currentRoom: room.key})
-     	console.log(this.state.currentRoom);
+      	this.setState({ rooms: this.state.rooms.concat( room )})
+     	this.selectCurrentRoom(room.key);
+        console.log(this.state.currentRoom);
+     });
+     this.messagesRef.on('child_added', snapshot => {
+	const message = snapshot.val();
+       	message.key = snapshot.key;
+       	this.setState({ messages: this.state.messages.concat( message ) })
      });
   }
    selectCurrentRoom(key){
      console.log(key);
-     this.setState({currentRoom: key});
+     if (key === this.state.currentRoom) return;
+     this.messagesRef.off();
+     this.messagesRef = database.ref('messages/' + key);
+     this.setState({currentRoom: key, messages: []});
+     this.messagesRef.on('child_added', snapshot => {
+	const message = snapshot.val();
+       	message.key = snapshot.key;
+       	this.setState({ messages: this.state.messages.concat( message ) })
+     });
    }
    selectRoom(e){
      let key = e.target.getAttribute("mumbu");
      this.selectCurrentRoom(key);
+   }
+   handleMessageChange(event) {
+     this.setState({newMessage: event.target.value});
+   }
+
+   handleMessageSubmit(event) {
+     event.preventDefault();
+     const time = moment().format('MMMM Do YYYY, h:mm a');
+     console.log(time);
+     if (this.state.newMessage !== ''){
+       let message = {username: "Be",
+		    content: this.state.newMessage,
+		    sentAt: time
+		   };
+	var newPostKey = this.messagesRef.push(message).key;
+	console.log(newPostKey);
+     }
+     this.setState({newMessage: ''});
    }
 
    handleChange(event) {
@@ -66,7 +103,7 @@ class App extends Component {
 	<main>
 	  <h1>{this.state.currentRoom}</h1>
 	  <RoomList handleSubmit={this.handleSubmit} handleChange={this.handleChange} rooms={this.state.rooms} newRoom={this.state.newRoom} selectRoom={(e)=>this.selectRoom(e)} />
-	  <MessageList user="Valorie" roomId={this.state.currentRoom} firebase={database}/>
+	  <MessageList handleSubmit={this.handleMessageSubmit} handleChange={this.handleMessageChange} newMessage={this.state.newMessage} user="Valorie" roomId={this.state.currentRoom} messages={this.state.messages}/>
 	</main>
       </div>
     );
